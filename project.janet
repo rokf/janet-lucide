@@ -8,5 +8,4 @@
   :dependencies [])
 
 (declare-source
-  :prefix "lucide"
-  :source ["src/init.jimage"])
+  :source ["src/lucide.jimage"])

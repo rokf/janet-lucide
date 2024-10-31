@@ -1,5 +1,5 @@
 # This script takes SVG files from the lucide/icons subfolder and
-# produces Janet functions in the src/init.janet file - a function
+# produces Janet functions in the src/lucide.jimage file - a function
 # per icon.
 
 (def- filenames (filter (fn [name]
@@ -24,16 +24,18 @@
                                          :close-tag (* "</" (backmatch :tag-name) ">")})
                              :trash (any (if-not "<" 1))}))
 
-(each filename (take 2 filenames) (do
-                                    (def content (slurp (string "lucide/icons/" filename)))
-                                    (def just-filename (first (string/split "." filename)))
-                                    (def svg (first (peg/match svg-peg content)))
-                                    (put icon-functions (keyword just-filename) (fn [&opt size]
-                                                                                  (default size 24)
-                                                                                  (def svg-copy (array ;svg))
-                                                                                  (put-in svg-copy [1 :height] (string size))
-                                                                                  (put-in svg-copy [1 :width] (string size))
-                                                                                  svg-copy))))
+(def out-env (make-env))
 
-(with [f (file/open "src/init.jimage" :w)]
-  (file/write f (make-image icon-functions)))
+(each filename filenames (do
+                           (def content (slurp (string "lucide/icons/" filename)))
+                           (def just-filename (first (string/split "." filename)))
+                           (def svg (first (peg/match svg-peg content)))
+                           (put out-env (symbol just-filename) @{:value (fn [&opt size]
+                                                                          (default size 24)
+                                                                          (def svg-copy (array ;svg))
+                                                                          (put-in svg-copy [1 :height] (string size))
+                                                                          (put-in svg-copy [1 :width] (string size))
+                                                                          svg-copy)})))
+
+(with [f (file/open "src/lucide.jimage" :w)]
+  (file/write f (make-image out-env)))

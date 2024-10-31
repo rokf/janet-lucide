@@ -2,7 +2,7 @@
 
 This library contains Lucide icons in form of Janet standard data structures. These are meant to be used together with something like [spork/htmlgen](https://janet-lang.org/api/spork/htmlgen.html).
 
-## LICENSE
+## License
 
 The `lucide` folder is a submodule with the official [lucide](https://github.com/lucide-icons/lucide) Git repository. See their license for that part. It was using ISC the last time I checked.
 
