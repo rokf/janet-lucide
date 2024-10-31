@@ -22,10 +22,7 @@
 
 (eachp [k v] (require "lucide") (array/push rows [:tr
                                                   [:td (string k ".svg")]
-                                                  [:td (tuple ;((get v :value)))]
+                                                  [:td ((get v :value))]
                                                   [:td (string "(lucide/" k ")")]]))
-
-
-# (eachp [k v] (require "lucide") (pp (htmlgen/html (tuple ;((get v :value))))))
 
 (spit "preview/preview.html" (layout rows))

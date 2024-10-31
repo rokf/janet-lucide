@@ -11,6 +11,8 @@
   (default children [])
   [tag (table ;attrs) ;children])
 
+# The HTML PEG from https://janet.guide/pegular-expressions/ was taken as a
+# base for this one.
 (def- svg-peg (peg/compile ~{:main (* :nodes -1)
                              :nodes (any (+ :element :trash))
                              :element (unref
@@ -35,7 +37,7 @@
                                                                           (def svg-copy (array ;svg))
                                                                           (put-in svg-copy [1 :height] (string size))
                                                                           (put-in svg-copy [1 :width] (string size))
-                                                                          svg-copy)})))
+                                                                          (tuple ;svg-copy))})))
 
 (with [f (file/open "src/lucide.jimage" :w)]
   (file/write f (make-image out-env)))
