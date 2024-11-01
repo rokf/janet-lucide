@@ -13,10 +13,10 @@
       [:header
        [:hgroup [:h2 "Lucide Icon Preview"] [:p "These are the icons you'll get by importing the module."]]]
       [:main
-       [:table {:class "striped"} [:thread [:tr
-                                            [:th {:scope "col"} [:strong "Source"]]
-                                            [:th {:scope "col"} [:strong "Icon"]]
-                                            [:th {:scope "col"} [:strong "Function"]]]] [:tbody ;rows]]]]]))
+       [:table {:class "striped"} [:thead [:tr
+                                           [:th {:scope "col"} "Source"]
+                                           [:th {:scope "col"} "Icon"]
+                                           [:th {:scope "col"} "Function"]]] [:tbody ;rows]]]]]))
 
 (def rows @[])
 
