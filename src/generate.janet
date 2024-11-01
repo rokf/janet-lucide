@@ -5,8 +5,6 @@
 (def- filenames (filter (fn [name]
                           (string/has-suffix? ".svg" name)) (os/dir "lucide/icons")))
 
-(def icon-functions @{})
-
 (defn- element-to-tuple [tag attrs &opt children]
   (default children [])
   [tag (table ;attrs) ;children])
