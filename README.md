@@ -27,7 +27,17 @@ Each icon has its own function, which optionally accepts a size in pixels (integ
 (lucide/alarm-clock-plus 32)
 ```
 
-See the HTML page in the [preview](./preview) folder for a list of available icons. There should also be a script that generates that page, where you should be able to see how these icons are meant to actually be used.
+See the HTML page in the [preview](./preview) folder for a list of available icons. There should also be a script that generates that page.
+
+## Icon updates
+
+To regenerate the `lucide` module first update the submodule with the official `lucide` Git repository. One way to do this is to go into the `lucide` folder and run `git pull`. This will pull down the latest commits for the current branch, which should be `main`.
+
+Then run `janet src/generate.janet` from the root of the repository. This should update the `src/lucide.jimage` file.
+
+## Preview
+
+To regenerate the preview page simply run `janet preview/preview.janet` from the root of the repository. This will update the `preview/preview.html` file.
 
 ## License
 
