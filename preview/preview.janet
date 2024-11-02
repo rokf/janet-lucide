@@ -1,5 +1,7 @@
 (import spork/htmlgen)
 
+(import lucide)
+
 (defn- layout [rows]
   (htmlgen/html
     [:html {:lang "en"}
@@ -16,13 +18,21 @@
        [:table {:class "striped"} [:thead [:tr
                                            [:th {:scope "col"} "Source"]
                                            [:th {:scope "col"} "Icon"]
-                                           [:th {:scope "col"} "Function"]]] [:tbody ;rows]]]]]))
+                                           [:th {:scope "col"} "Function"]
+                                           [:th {:scope "col"} "Actions"]]] [:tbody ;rows]]]]]))
 
 (def rows @[])
 
-(eachp [k v] (require "lucide") (array/push rows [:tr
-                                                  [:td (string k ".svg")]
-                                                  [:td ((get v :value))]
-                                                  [:td (string "(lucide/" k ")")]]))
+(def lucide-module (require "lucide"))
+(def ordered-keys (sort (keys lucide-module)))
+
+(each k ordered-keys (array/push rows [:tr
+                                       [:td [:code (string k ".svg")]]
+                                       [:td ((get-in lucide-module [k :value]))]
+                                       [:td [:code (string "(lucide/" k ")")]]
+                                       [:td [:button {:class "contrast"
+                                                      :data-tooltip "Copy function call to clipboard"
+                                                      :data-placement "left"
+                                                      :onclick (string/format "navigator.clipboard.writeText(\"%s\")" (string "(lucide/" k ")"))} (lucide/clipboard-copy 16)]]]))
 
 (spit "preview/preview.html" (layout rows))
