@@ -1,6 +1,6 @@
 # janet-lucide
 
-This library contains Lucide icons in form of Janet standard data structures. These are meant to be used together with something like [spork/htmlgen](https://janet-lang.org/api/spork/htmlgen.html).
+This library contains Lucide icons in form of Janet standard data structures. These are meant to be used together with something like [spork/htmlgen](https://janet-lang.org/spork/api/htmlgen.html).
 
 ## Installation
 
